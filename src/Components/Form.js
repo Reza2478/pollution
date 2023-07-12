@@ -7,7 +7,7 @@ import { show } from "./Helper/Functions";
 import Earth from "../Assets/Images/27634.jpg";
 
 const Form = () => {
-  const [pollution, setPollution] = useState("");
+  const [inputValue, setInputValue] = useState("");
   const [error, setError] = useState("");
   const [data, setData] = useState({
     sumOfMinimal: 0,
@@ -19,18 +19,18 @@ const Form = () => {
 
   useEffect(() => {
     setTimeout(() => {
-      setData({ ...show(pollution) });
+      if(inputValue!=="")setData({ ...show(inputValue) });
     }, 1000);
-  }, [pollution]);
+  }, [inputValue]);
 
   const changeHandler = (e) => {
     let reg = new RegExp(/^(?!,$)[\d,.]+$/);
     if (e.target.value.match(reg)) {
-      setPollution(e.target.value);
+      setInputValue(e.target.value);
       setError("");
     } else {
       setError("لطفا فقط از اعداد همراه با علامت ( , ) استفاده کنید");
-      setPollution("");
+      setInputValue("");
     }
   };
 
@@ -61,14 +61,16 @@ const Form = () => {
                 حداقل تعداد فیلتر برای کم کردن آلودگی: {data.counter}
               </p>
             )}
-            
+
             <div className="flex">
               {data.pollution !== undefined &&
                 data.pollution.map((item) => <p key={item}>{`${item}+`}</p>)}
             </div>
             <div className="flex">
               {data.minimalPollution !== undefined &&
-                data.minimalPollution.map((item) => <p key={item}>{`${item}+`}</p>)}
+                data.minimalPollution.map((item) => (
+                  <p key={item}>{`${item}+`}</p>
+                ))}
             </div>
             {data.sumOfPollution !== undefined && <p>{data.sumOfPollution}</p>}
             {data.sumOfMinimal !== undefined && <p>{data.sumOfMinimal}</p>}

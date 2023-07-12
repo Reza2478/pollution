@@ -10,10 +10,10 @@ export const calculate = (data) => {
 
 export const func1 = (data) => {
   if (data !== "") {
-    data = splitter(data);
-    const sum = calculate(data);
-    let newArr = sortArray(data);
-    let newSum = calculate(data);
+    let curr = splitter(data);
+    const sum = calculate(curr);
+    let newArr = sortArray(curr);
+    let newSum = calculate(curr);
     let counter = 0;
     while (sum / 2 <= newSum) {
       newArr = sortArray(newArr);
@@ -22,8 +22,8 @@ export const func1 = (data) => {
       counter++;
     }
 
-    return [ counter, newArr, newSum, sum ];
-  } else return 0;
+    return [counter, splitter(data), newArr, newSum, sum];
+  } 
 };
 
 export const splitter = (value) => {
@@ -32,14 +32,14 @@ export const splitter = (value) => {
   return result;
 };
 
-export const show = (pollution) => {
-  const arr=splitter(pollution)
-  const result = func1(pollution);
+export const show = (value) => {
+  const result = func1(value);
+  console.log(result[1])
   return {
-    counter:result[0],
-    pollution: arr,
-    minimalPollution: result[1],
-    sumOfMinimal: result[2],
-    sumOfPollution: result[3],
+    counter: result[0],
+    pollution: result[1],
+    minimalPollution: result[2],
+    sumOfMinimal: result[3],
+    sumOfPollution: result[4],
   };
 };
