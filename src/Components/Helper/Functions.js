@@ -1,3 +1,4 @@
+
 export const sortArray = (data) => {
   const result = data.sort((a, b) => b - a);
   return result;
@@ -13,12 +14,12 @@ export const func1 = (data) => {
     data=splitter(data)
     const sum = calculate(data);
     let newArr = sortArray(data);
-    let sumNew = calculate(data);
+    let newSum = calculate(data);
     let counter = 0;
-    while (sum / 2 <= sumNew) {
+    while (sum / 2 <= newSum) {
       newArr = sortArray(newArr);
       newArr[0] = newArr[0] / 2;
-      sumNew = calculate(newArr);
+      newSum = calculate(newArr);
       counter++;
     }
     return counter;
