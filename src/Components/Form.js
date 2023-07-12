@@ -1,20 +1,25 @@
 import React, { useEffect, useState } from "react";
 
 //Helpers
-import { func1 } from "./Helper/Functions";
+import { show } from "./Helper/Functions";
 
 //Images
 import Earth from "../Assets/Images/27634.jpg";
 
 const Form = () => {
   const [pollution, setPollution] = useState("");
-  const [counter, setCounter] = useState(0);
   const [error, setError] = useState("");
+  const [data, setData] = useState({
+    sumOfMinimal: 0,
+    sumOfPollution: 0,
+    pollution: [],
+    minimalPollution: [],
+    counter: 0,
+  });
 
   useEffect(() => {
     setTimeout(() => {
-      const result = func1(pollution);
-      setCounter(result);
+      setData({ ...show(pollution) });
     }, 1000);
   }, [pollution]);
 
@@ -53,9 +58,20 @@ const Form = () => {
               <p className="text-red-800 text-sm mt-5">{error}</p>
             ) : (
               <p className="text-white margin-top-5 mt-5">
-                حداقل تعداد فیلتر برای کم کردن آلودگی: {counter}
+                حداقل تعداد فیلتر برای کم کردن آلودگی: {data.counter}
               </p>
             )}
+            
+            <div className="flex">
+              {data.pollution !== undefined &&
+                data.pollution.map((item) => <p key={item}>{`${item}+`}</p>)}
+            </div>
+            <div className="flex">
+              {data.minimalPollution !== undefined &&
+                data.minimalPollution.map((item) => <p key={item}>{`${item}+`}</p>)}
+            </div>
+            {data.sumOfPollution !== undefined && <p>{data.sumOfPollution}</p>}
+            {data.sumOfMinimal !== undefined && <p>{data.sumOfMinimal}</p>}
           </div>
         </div>
       </div>
