@@ -6,7 +6,7 @@ const Code = () => {
   return (
     <div className="bg-white m-2 p-2 w-96 text-slate-600 shadow-md rounded-md">
       <p className="font-bold drop-shadow-md mb-7">تابع نوشته شده برای انجام عملیات</p>
-      <text dir="ltr">{code.split('\n').map(i=><p>{i}</p>)}</text>
+      {code.split('\n').map((item,id)=><p key={id} dir="ltr">{item}</p>)}
     </div>
   );
 };

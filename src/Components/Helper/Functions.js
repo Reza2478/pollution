@@ -33,7 +33,6 @@ export const splitter = (value) => {
 
 export const show = (value) => {
   const result = operation(value);
-  console.log(result[1])
   return {
     filterCount: result[0],
     pollution: result[1],
