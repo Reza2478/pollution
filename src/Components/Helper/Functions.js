@@ -11,18 +11,17 @@ export const calculate = (data) => {
 export const operation = (data) => {
   if (data !== "") {
     let curr = splitter(data);
-    const sum = calculate(curr);
-    let newArr = sortArray(curr);
-    let newSum = calculate(curr);
-    let counter = 0;
-    while (sum / 2 <= newSum) {
-      newArr = sortArray(newArr);
-      newArr[0] = newArr[0] / 2;
-      newSum = calculate(newArr);
-      counter++;
+    const sumOfPollution = calculate(curr);
+    let minimalPollution = sortArray(curr);
+    let sumOfMinimal = calculate(curr);
+    let filterCount = 0;
+    while (sumOfPollution / 2 <= sumOfMinimal) {
+      minimalPollution = sortArray(minimalPollution);
+      minimalPollution[0] = minimalPollution[0] / 2;
+      sumOfMinimal = calculate(minimalPollution);
+      filterCount++;
     }
-
-    return [counter, splitter(data), newArr, newSum, sum];
+    return [filterCount, splitter(data), minimalPollution, sumOfMinimal, sumOfPollution];
   } 
 };
 
@@ -36,7 +35,7 @@ export const show = (value) => {
   const result = operation(value);
   console.log(result[1])
   return {
-    counter: result[0],
+    filterCount: result[0],
     pollution: result[1],
     minimalPollution: result[2],
     sumOfMinimal: result[3],

@@ -7,6 +7,7 @@ import { show } from "./Helper/Functions";
 import Calculations from "./Calculations";
 import Title from "./Title";
 import InputBox from "./InputBox";
+import Code from "./Code";
 
 //Images
 import Earth from "../Assets/Images/27634.jpg";
@@ -19,7 +20,7 @@ const Form = () => {
     sumOfPollution: null,
     pollution: [],
     minimalPollution: [],
-    counter: 0,
+    filterCount: 0,
   });
 
   useEffect(() => {
@@ -39,26 +40,39 @@ const Form = () => {
     }
   };
 
+  
+
   return (
     <div className="bg-blue-100 h-[100vh] flex flex-col items-center justify-center p-8">
-      <div className="bg-blue100 w-full h-[100vh]  flex items-center justify-center">
+      <div className="bg-blue100 w-full h-[100vh]  flex md:flex-row flex-col items-center justify-center">
+        <Code/>
         <div className="flex  shadow-md">
           <div>
             <img src={Earth} alt="pic" className="max-w-sm hidden md:block" />
           </div>
           <div className="bg-orange-400 flex flex-col p-4 w-72">
-            <Title/>
-            <InputBox fn={changeHandler}/>
+            <Title />
+            <InputBox fn={changeHandler} />
             {error ? (
               <p className="text-red-800 text-sm mt-5">{error}</p>
             ) : (
-              inputValue&&<div className="flex flex-col">
-                <p className="text-white margin-top-5 my-3 drop-shadow-md">
-                  حداقل تعداد فیلتر برای کم کردن آلودگی: {data.counter}
-                </p>
-                  <Calculations list={data.pollution} sum={data.sumOfPollution} status='before'/>
-                  <Calculations list={data.minimalPollution} sum={data.sumOfMinimal} status='after'/>
-              </div>
+              inputValue && (
+                <div className="flex flex-col">
+                  <p className="text-white margin-top-5 my-3 drop-shadow-md">
+                    حداقل تعداد فیلتر برای کم کردن آلودگی: {data.filterCount}
+                  </p>
+                  <Calculations
+                    list={data.pollution}
+                    sum={data.sumOfPollution}
+                    status="before"
+                  />
+                  <Calculations
+                    list={data.minimalPollution}
+                    sum={data.sumOfMinimal}
+                    status="after"
+                  />
+                </div>
+              )
             )}
           </div>
         </div>
