@@ -8,7 +8,7 @@ export const calculate = (data) => {
   return sum;
 };
 
-export const func1 = (data) => {
+export const operation = (data) => {
   if (data !== "") {
     let curr = splitter(data);
     const sum = calculate(curr);
@@ -33,7 +33,7 @@ export const splitter = (value) => {
 };
 
 export const show = (value) => {
-  const result = func1(value);
+  const result = operation(value);
   console.log(result[1])
   return {
     counter: result[0],
